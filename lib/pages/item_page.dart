@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:belanja/models/item.dart';
 
 class ItemPage extends StatelessWidget {
+  final Item item;
+
+  ItemPage({required this.item});
+
   @override
   Widget build(BuildContext context) {
-    // Membaca nilai yang dikirimkan dari halaman sebelumnya
-    final itemArgs = ModalRoute.of(context)!.settings.arguments as Item;
-
     return Scaffold(
       appBar: AppBar(
         title: Text('Item Details'),
@@ -15,8 +16,18 @@ class ItemPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Item Name: ${itemArgs.name}'),
-            Text('Item Price: ${itemArgs.price.toString()}'),
+            Hero(
+
+              tag: item.name,
+              child: Image.asset(
+                'assets/${item.image}',
+                height: 300,
+              ),
+            ),
+            Text('Item Name: ${item.name}'),
+            Text('Item Price: ${item.price.toString()}'),
+            Text('Item Stock: ${item.stock.toString()}'), // Menampilkan stok produk
+            Text('Item Rating: ${item.rating.toString()}'), // Menampilkan rating produk
           ],
         ),
       ),
